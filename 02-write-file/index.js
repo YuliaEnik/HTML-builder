@@ -1,19 +1,17 @@
 const fs   = require('fs');
 const path = require('path');
-const link = path.join(__dirname, 'text.txt')
-
+const link = path.join(__dirname, 'text.txt');
 const readline = require('readline');
 const { 
     stdin: input, 
     stdout: output, 
-    stdout
       } = require('process');
+const messageOpen = "Please, write your text";
+const messageClose = "Session is over";
 
 const rl = readline.createInterface({ input, output });
 
-const message = `${"Please, write your text"}`;
-
-console.log(message);
+console.log(messageOpen);
 
 fs.open(link, "a+", (err) => {
     if(err) throw err;
@@ -22,7 +20,7 @@ fs.open(link, "a+", (err) => {
 rl.on("line", (input) => {
     input.trim();
     if (input == "exit") {
-        console.log("session is over");
+        console.log(messageClose);
         process.exit();
     }
     fs.appendFile(link, `${input}\n`, (err) => {
@@ -33,6 +31,6 @@ rl.on("line", (input) => {
 })
 
 rl.on("close", () => {
-    console.log("session is over");
+    console.log(messageClose);
     process.exit();
   });
