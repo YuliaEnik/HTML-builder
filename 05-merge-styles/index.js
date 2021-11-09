@@ -3,7 +3,7 @@ const path = require('path');
 const bundleCss = path.join(__dirname, 'project-dist/bundle.css');
 const cssFiles = path.join(__dirname, 'styles');
 
-const buildCSS = () => {
+
 fs.writeFile(bundleCss, "", (err) => {
     if (err) throw err;
   });
@@ -23,6 +23,5 @@ fs.writeFile(bundleCss, "", (err) => {
 }
 };
 }); 
-}
 
-buildCSS()
+
