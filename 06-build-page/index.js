@@ -14,6 +14,7 @@ const template = path.join(__dirname, 'template.html');
 const copyFiles = async (assets, prodectDist) => {
     await fs.mkdir(prodectDist, {recursive: true}, () => {});
     fs.readdir(assets, {withFileTypes: true}, (err, files) => {
+      if (err) throw err; 
         for (let file of files)  {
         let assetsFile = path.join(assets, file.name);
         let projectAssetsFile = path.join(prodectDist, file.name);
@@ -35,10 +36,12 @@ const copyFiles = async (assets, prodectDist) => {
 
   // CSS
 
-  const buildCSS = ( folder, item) => {
+  const buildCSS = ( folder, item, extension) => {
     fs.readdir(folder, { withFileTypes: true }, (err, files) => {
         if (err) throw err; 
         for (let file of files) {
+          if((path.extname(`${file}`)).toString = extension){
+            console.log(path.extname(`${file}`))
               fs.readFile(`${folder}/${file.name}`, "utf-8", (err, data) => {
                 if (err) throw err;
                 else {
@@ -47,12 +50,13 @@ const copyFiles = async (assets, prodectDist) => {
                   });
               }
           });
-      
+        }
       };
       });
     }
   
-    buildCSS(stylesFolder, css);
+  const estensionCSS = ".css"
+  buildCSS(stylesFolder, css, estensionCSS);
 
 // HTML
 
