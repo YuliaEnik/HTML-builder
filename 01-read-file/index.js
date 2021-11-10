@@ -1,10 +1,11 @@
 const fs   = require('fs');
 const path = require('path');
-const link = path.join(__dirname, 'text.txt')
+const link = path.join(__dirname, 'text.txt');
+const stream = new fs.ReadStream(link , { encoding: 'utf-8' });
 
-fs.readFile(link, 'utf8', (err, data) => {
-    if(err) throw err;
-       data = data.trim();
-       console.log(data);
+stream.on("readable", () => {
+   const data = stream.read();
+   if (data) {
+      console.log(data.trim());
+   }
 });
-
